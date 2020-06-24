@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+<!-- Puxa o layout.html usando o nunjucks e enxutando o código -->
+
+{% set pageId = "page-search-results" %}
+<!-- set usa pra setar divs -->
+
+{% block title %}
+    <title>Resultado da Pesquisa</title>
+{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/styles/search-results.css">
+{% endblock styles %}
+
+{% block content %}
+    {% include "partials/page-header.html" %}
+
+    {% if total > 0 %}
+        <main>
+            <h4>
+                <strong>{{total}}</strong>
+                ponto(s) encontrados
+            </h4>
+            <div class="cards">
+
+                {% for place in places %}
+
+                    <div class="card">
+                        <img src="{{place.image}}" alt="{{place.name}}">
+                        <h1>{{place.name}}</h1>
+                        <h3>{{place.items}}</h3>
+                        <p>{{place.city}},
+                            {{place.state}}
+                            <br>
+                            {{place.address}}
+                            <br>
+                            {{place.address2}}
+                        </p>
+                    </div>
+
+                {% endfor %}
+            </div>
+            {%else%}
+            <h4>
+                <strong>Nenhum</strong>
+                local encontrado</h4>
+        {% endif %}
+
+    </main>
+{% endblock content %}
